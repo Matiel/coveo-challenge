@@ -1,22 +1,42 @@
-# coveo
+# Coding challenge
 
-A Clojure library designed to ... well, that part is up to you.
+Streaming coding challenge for the Coveo interview.
+
+The application is made of three parts.
+
+1. Producer  
+The producer reads the data from the csv file, removes the username and userId for
+privacy reasons and sends it to Kafka.
+
+2. Consumer  
+The consumer reads the data in Kafka and writes saves it grouped by event-type. It
+also stores some information that are useful to compute statistics.
+
+3. Display statistics  
+This part of the application uses data saved by the consumer to display useful stats
+to the end user.
+
+## Setup
+
+1. Make sure docker is installed and running.
+   Then, run
+    ```
+    docker-compose up
+    ```
+
+2. Install [lein](https://leiningen.org/)
+3. ```lein deps```
 
 ## Usage
 
-FIXME
+Start the producer and then the consumer.
+You can manually view the statistics generated in this folder `./resources/output`
 
-## License
+### Producer
+```lein run producer```
 
-Copyright © 2021 FIXME
+### Consumer
+```lein run consumer```
 
-This program and the accompanying materials are made available under the
-terms of the Eclipse Public License 2.0 which is available at
-http://www.eclipse.org/legal/epl-2.0.
-
-This Source Code may also be made available under the following Secondary
-Licenses when the conditions for such availability set forth in the Eclipse
-Public License, v. 2.0 are satisfied: GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or (at your
-option) any later version, with the GNU Classpath Exception which is available
-at https://www.gnu.org/software/classpath/license.html.
+### Display stats
+```lein run stats```
